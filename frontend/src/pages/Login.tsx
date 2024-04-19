@@ -20,9 +20,12 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading , setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true)
 
     const data = {
         email,
@@ -43,6 +46,7 @@ function Login() {
       console.log(response)
     
       if(response.data.error) {
+        setLoading(false)
         toast.error(response.data.error , {
           action: {
             label: "Close",
@@ -51,17 +55,17 @@ function Login() {
         })
       } else {
 
+        setLoading(false)
         setEmail("");
         setPassword("");
         toast.success("Login successful , welcome back" , {
           action: {
-            label: "Go to Home",
-            onClick: () => {
-              navigate("/")
-              window.location.reload();
-            },
+            label: "Close",
+            onClick: () => {},
           },
-        })
+        });
+        navigate("/")
+        window.location.reload();
       }
 
 
@@ -85,7 +89,7 @@ function Login() {
           <Label htmlFor="email">Email</Label>
           <Input id="email"
            type="email" 
-           placeholder="m@example.com" 
+           placeholder="user@example.com" 
            value={email}
            onChange={(e : React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
            required />
@@ -100,7 +104,15 @@ function Login() {
       </CardContent>
       <CardFooter className="">
         <div className="w-full">
-        <Button className="w-full">Sign in</Button>
+        <Button className="w-full">
+        {
+            loading ? (
+              <div className="size-8 border-2 border-t-black border-b-gray-400 border-l-gray-400 rounded-full animate-spin">
+
+              </div>
+            ) : "Sign in"
+          }
+          </Button>
         <Button className="w-full mt-2" variant="outline">
           <Link to="/register">
           Register New Account

@@ -20,9 +20,12 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading , setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true)
 
     const data = {
         name,
@@ -39,8 +42,9 @@ const Register = () => {
           headers: { "content-type": "application/json" },
         }
       );
-    
+      
       if(response.data.error) {
+        setLoading(false)
         toast.error(response.data.error , {
           action: {
             label: "Close",
@@ -48,7 +52,7 @@ const Register = () => {
           },
         })
       } else {
-
+        setLoading(false)
         setName("");
         setEmail("");
         setPassword("");
@@ -82,7 +86,7 @@ const Register = () => {
           <Label htmlFor="name">Name</Label>
           <Input id="name"
            type="text" 
-           placeholder="m@example.com" 
+           placeholder="user@example.com" 
            value={name}
            onChange={(e : React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
            required />
@@ -105,7 +109,15 @@ const Register = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Sign in</Button>
+        <Button className="w-full">
+          {
+            loading ? (
+              <div className="size-8 border-2 border-t-black border-b-gray-400 border-l-gray-400 rounded-full animate-spin">
+
+              </div>
+            ) : "Sign Up"
+          }
+        </Button>
       </CardFooter>
     </Card>
     </form>
