@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -12,7 +12,8 @@ import Gallery from "./pages/Gallery";
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 function App() {
-  const { user , setUser } = useUserStore();  
+  const { user , setUser } = useUserStore(); 
+  const [loading  , setloading] = useState(true) 
 
 
   useEffect(() => {
@@ -26,13 +27,19 @@ function App() {
           },
         })
         .then((response) => {
-          console.log(response);
           setUser(response.data.name)
-          
+          setloading(false);
         });
     }
   }, [user , setUser]);
 
+  // if(loading){
+  //   return (
+  //     <div>
+  //       Loading.....
+  //     </div>
+  //   )
+  // }
   return (
     <ThemeProvider defaultTheme="dark">
       <Toaster />

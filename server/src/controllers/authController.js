@@ -62,6 +62,11 @@ const loginUser = async (req , res) => {
 const profile = (req ,res) => {
     const token = req.query.localStorageData;
     console.log(token)
+    
+    if(!token){
+        res.json({err : "Please Login" })
+    }
+
     if(token) {
         const decoded = jwt.decode(token)
         res.json(decoded)
