@@ -11,7 +11,9 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended : false}))
 
 app.use('/auth' , authRouter)
-
+app.get('/' , (req , res) => {
+  res.json("Hello")
+})
 
 mongoose
   .connect(process.env.mongoDB)
