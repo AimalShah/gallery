@@ -14,7 +14,7 @@ import {
 
 export default function Navbar() {
   const { user } = useUserStore();
-  const fallback = user === null ? "PH" : user.substring(0, 2).toUpperCase();
+  const fallback = !user  ? "PH" : user.substring(0, 2).toUpperCase();
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
@@ -29,7 +29,7 @@ export default function Navbar() {
             </Link>
             </h1>
         <div className="font-bold text-lg ">
-          {user === null ? (
+          {!user  ? (
             <div className="flex gap-2">
               <Button variant="default" size="lg">
               <Link to="/login" className="block">Login</Link>
