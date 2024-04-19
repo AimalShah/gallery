@@ -7,8 +7,7 @@ import cors from "cors"
 const router = express.Router();
 
 router.use(cors({
-    credentials : true , 
-    origin : "http://localhost:5173"
+    credentials : true ,
 }))
 
 router.post('/register' , registerUser)
