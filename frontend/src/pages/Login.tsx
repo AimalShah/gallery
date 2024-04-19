@@ -32,7 +32,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/auth/login",
+        "https://gallery-server-36fqu6ma7-aimalshahs-projects.vercel.app/auth/login",
         formData,
         {
           headers: { "content-type": "application/json" },
