@@ -6,9 +6,7 @@ import cors from "cors"
 
 const router = express.Router();
 
-router.use(cors({
-    credentials : true ,
-}))
+router.use(cors())
 
 router.post('/register' , registerUser)
 router.post('/login' , loginUser)
