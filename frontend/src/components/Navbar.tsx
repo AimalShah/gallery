@@ -24,7 +24,7 @@ export default function Navbar() {
     <div className="h-[10%] border-border border-b">
       <div className=" h-full container max-auto flex items-center justify-between">
         <h1 className="font-bold text-lg">
-            <Link to="/">
+            <Link to="/" className="block">
             Gallery
             </Link>
             </h1>
@@ -32,7 +32,7 @@ export default function Navbar() {
           {user === null ? (
             <div className="flex gap-2">
               <Button variant="default" size="lg">
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="block">Login</Link>
               </Button>
             </div>
           ) : (

@@ -40,7 +40,7 @@ export default function Gallery() {
     }
     if(!user){
         return (
-            <div className="h-fulltext-center flex flex-col items-center justify-center mt-48">
+            <div className="h-full flex flex-col justify-center items-center">
             <h1 className="text-xl">Please Login to Your Gallery</h1>
             <div>
             <Button className="mt-2 w-24">

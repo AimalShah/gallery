@@ -32,7 +32,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "https://gallery-server-36fqu6ma7-aimalshahs-projects.vercel.app/auth/login",
+        "https://gallery-server-five.vercel.app/auth/login",
         formData,
         {
           headers: { "content-type": "application/json" },
@@ -72,7 +72,7 @@ function Login() {
   };
 
   return (
-    <form className="flex items-center justify-center" onSubmit={handleSubmit}> 
+    <form className="h-full px-10 flex items-center justify-center" onSubmit={handleSubmit}> 
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>

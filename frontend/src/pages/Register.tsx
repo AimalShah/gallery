@@ -33,7 +33,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/auth/register",
+        "https://gallery-server-five.vercel.app/auth/register",
         formData,
         {
           headers: { "content-type": "application/json" },
@@ -69,7 +69,7 @@ const Register = () => {
   };
 
   return (
-    <form className="flex items-center justify-center mt-20 p-4" onSubmit={handleSubmit}> 
+    <form className="h-full flex items-center justify-center  p-10" onSubmit={handleSubmit}> 
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Sign Up</CardTitle>
