@@ -20,7 +20,7 @@ function App() {
 
     if (!user) {
       axios
-        .get("https://gallery-server-36fqu6ma7-aimalshahs-projects.vercel.app/auth/profile", {
+        .get("https://gallery-server-five.vercel.app/auth/profile", {
           params: {
             localStorageData: token,
           },
