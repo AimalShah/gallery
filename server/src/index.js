@@ -16,6 +16,9 @@ app.get('/' , (req , res) => {
   res.json("Hello")
 })
 
+app.get('/auth' , (req ,res) => {
+  res.json("auth page")
+})
 mongoose
   .connect(process.env.mongoDB)
   .then(() => {
