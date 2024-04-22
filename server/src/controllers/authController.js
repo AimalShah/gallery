@@ -64,9 +64,8 @@ const loginUser = async (req , res) => {
 }
 
 const profile = async (req ,res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     const token = req.query.localStorageData;
-
+    res.header("Access-Control-Allow-Origin", "*");
     if(!token){
         res.json({err : "Please Login" })
     }
