@@ -1,47 +1,17 @@
-import { Button } from "@/components/ui/button";
 import useUserStore from "@/store/userStore"
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import useImageStore from "@/store/imageStore";
 
 export default function Gallery() {
-    const {user} = useUserStore();
-    const dialogRef = useRef<HTMLDialogElement | null>(null)
-    const mockImages = [
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
-        "https://utfs.io/f/90b79d9c-a528-4c92-ba4c-8b6613cbbcdd-1j9eeo.jpeg",
+    const {user } = useUserStore();
+    const {data}  = useImageStore();
+  
+    
 
-    ]
-
-    const openDialog = () => {
-        if(dialogRef.current) dialogRef.current.showModal();
-    }
-    const closeDialog = () => {
-        if(dialogRef.current) dialogRef.current.close()
-    }
+   
     if(!user){
         return (
-            <div className="h-full flex flex-col justify-center items-center">
-            <h1 className="text-xl">Please Login to Your Gallery</h1>
+            <div className="h-full flex flex-col justify-center items-center p-6">
+            {/* <h1 className="text-xl">Please Login to Your Gallery</h1>
             <div>
             <Button className="mt-2 w-24">
                 <Link to="/login">
@@ -53,47 +23,35 @@ export default function Gallery() {
                     Sign Up
                 </Link>
             </Button>
+            </div> */}
+            <div className="space-y-16">
+            <img src="https://utfs.io/f/8aeb5653-8ebb-4ae1-ace8-6ef575d4232a-usx631.svg" alt=""  className="w-96 opacity-50"/>
+            <p className="text-center text-xl text-primary/60 italic">Please Login to your account</p>
             </div>
             </div>
         )
     }
     if(user) {
       return (
-        <div className="container flex flex-wrap gap-6 justify-center">
+        <div className="h-full container flex flex-wrap gap-6 justify-center">
         {
-            mockImages.map((img) => (
-                <div>
-                <div className="flex flex-col h-72 w-72 p-4" onClick={openDialog}>
-                <img src={img} className="object-fit w-full h-full"/>
-                <h1 className="font-bold text-lg">aimal.png</h1>
+            data?.length === 0 ? (
+                <div className="h-full flex items-center flex-col justify-center gap-6" >
+                    <img src="https://utfs.io/f/2dd4f014-15f8-49e5-aadc-ad1f89399190-r0kkcg.svg" alt="" className="opacity-50 w-96" />
+                    <h1 className="text-center text-primary/60 text-xl italic">
+                        It looks like your gallery is empty upload some photos
+                    </h1>
                 </div>
-
-                <dialog ref={dialogRef} className="relative h-screen w-screen min-w-0 bg-background/60 border border-border overflow-x-hidden">
-
-                   <div className="w-full h-full flex flex-col lg:flex-row gap-2">
-                    <div className="flex-grow bg-white">
-                   <img src={img} alt=""  className="h-full w-full object-fill"/>
+            ) : (
+                data?.map((img : any) => (
+                    <div key={img._id}>
+                    <div className="flex flex-col w-48"     >
+                    <img src={img.imageURl} className="object-fit w-full h-full"/>
+                    <h1 className="font-bold text-lg">{img.imageName}</h1>
                     </div>
-                    <div className="w-96 flex-shrink-0 lg:border-l border-primary flex-col">
-                        <h1 className="text-primary p-4 text-center border-b border-primary">aimal.png</h1>
-                        <div className="text-primary p-4 border-b border-primary">
-                            Uploaded By : 
-                            <h1>Aimal Shah</h1>
-                        </div>
-                        <div className="text-primary p-4 border-b border-primary">
-                            Uploaded at : 
-                            <h1>{Date.now().toLocaleString()}</h1>
-                        </div>
                     </div>
-                    <Button className="absolute top-2 right-3" onClick={closeDialog}> 
-                        x
-                    </Button>
-                   </div>
-
-                </dialog>
-                </div>
-
-            ))
+                ))
+            )
             
         }
         </div>

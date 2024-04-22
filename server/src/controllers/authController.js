@@ -1,7 +1,11 @@
 import User from "../models/userModel.js";
+import Image from "../models/imageModel.js";
 import { hashPassword , comparePassword  } from "../helpres/authHelper.js";
 import jwt from "jsonwebtoken"
 import "dotenv/config"
+import S3Service from "../service/s3Service.js";
+
+const s3 = new S3Service(process.env.REGION , process.env.S3_ACCESS_KEY , process.env.S3_SECRET_KEY , process.env.S3_BUCKET_NAME)
 
 const registerUser = async (req , res) => {
     try {
@@ -59,18 +63,22 @@ const loginUser = async (req , res) => {
     }
 }
 
-const profile = (req ,res) => {
+const profile = async (req ,res) => {
     const token = req.query.localStorageData;
-    console.log(token)
-    
+
     if(!token){
         res.json({err : "Please Login" })
     }
 
     if(token) {
         const decoded = jwt.decode(token)
-        res.json(decoded)
-
+        const userData = await Image.find().populate('uploadUser' , 'name');
+        for(let i = 0; i < userData.length; i++){
+            const imageLink = await s3.getImageLinkByName(userData[i].imageName)
+            userData[i].imageURl = imageLink;
+        }
+        const logedinUserData = userData.filter((user) => user.uploadUser.name === decoded.name);
+        res.json({logedinUserData , decoded})
     }
 }
 

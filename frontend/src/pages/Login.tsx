@@ -96,7 +96,7 @@ function Login() {
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" 
+          <Input id="password" type="password" placeholder="password"
           value={password}
           onChange={(e : React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           required />

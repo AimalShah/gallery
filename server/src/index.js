@@ -1,23 +1,28 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import "dotenv/config";
-import { authRouter } from "./routes/auth.js";
 import cookieParser from 'cookie-parser';
+import { authRouter } from "./routes/auth.js";
+import { imageRouter } from "./routes/imageRouter.js";
+
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended : false}))
 
+
+
+
+
 app.use('/auth' , authRouter)
+app.use('/upload', imageRouter)
+
 app.get('/' , (req , res) => {
   res.json("Hello")
 })
 
-app.get('/auth' , (req ,res) => {
-  res.json("auth page")
-})
+
 
 mongoose
   .connect(process.env.mongoDB)

@@ -7,8 +7,7 @@ const imageSchema = new mongoose.Schema({
         require : true
     } , 
     imageURl : {
-        type : String , 
-        require : true
+        type : String  
     } , 
     uploadUser : {
         type : mongoose.Schema.Types.ObjectId , ref : 'User'
