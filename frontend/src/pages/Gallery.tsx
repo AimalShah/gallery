@@ -38,13 +38,13 @@ export default function Gallery() {
                     </h1>
                 </div>
             ) : (
-                data?.map((img ) => (
+                data?.map((img : any) => (
                     <Dialog>
                         <DialogTrigger>
                         <div key={img._id}>
                     <div className="flex flex-col w-48 cursor-pointer">
                     <AspectRatio ratio={1 / 1}>
-                        <img src={img.imageUrl} className="object-fit w-full h-full object-cover"/>
+                        <img src={img.imageURl} className="object-fit w-full h-full object-cover"/>
                     </AspectRatio>
                     <h1 className="text-lg font-light truncate overflow-hidden ">{img.imageName}</h1>
                     </div>
