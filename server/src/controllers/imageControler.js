@@ -16,7 +16,6 @@ const imageUpload = async (req, res) => {
   const data = jwt.decode(token);
 
   if (file) {
-
     const ImageData = await Image.create({
       imageName: file.originalname,
       uploadUser: data.id,

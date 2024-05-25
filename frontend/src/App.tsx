@@ -27,7 +27,7 @@ function App() {
       axios.get("https://gallery-server-five.vercel.app/auth/profile", {
           params: {
             localStorageData: token,
-          }, 
+          },
           headers : {
             'Access-Control-Allow-Origin' : '*',
             'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
