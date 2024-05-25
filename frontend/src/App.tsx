@@ -38,7 +38,6 @@ function App() {
             setloading(false)
             setUser(null)
           } else {
-            console.log(response.data)
             setUser(response.data.decoded)
             setData(response.data.logedinUserData)
             setloading(false);
